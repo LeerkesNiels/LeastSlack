@@ -18,20 +18,22 @@ public:
 	void makeLeastSlack();
 
 	void clearJobShop();
-	std::vector<std::string> parseString(const std::string &inputString);	
+	std::vector<std::string> parseString(const std::string &inputString);
 	void setJobName(std::string name);
 	void setJobDetails(const std::string &detailString);
 	int setJobList(const std::string &input);
 	void printJobShop();
 	void schedule();
-	void tick(Job job,int index);
+	void tick(Job job, int index);
 	void removeFirstInLine(Job job, int index);
 	void activateJob(int jobNr);
 	bool checkRunningMachine(int machineNr);
 	void removeFromActiveMachineList(int machineNr);
 	void printActiveMachineList();
-	bool checkForFasterMachines(int machieNr,Job job);
+	bool checkForFasterMachines(int machieNr, Job job);
 	bool finishCheck();
+	void checkAvailableJobs(int machineNr);
+
 private:
 	int amountOfMachines;
 	int amountOfJobs;

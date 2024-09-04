@@ -8,7 +8,7 @@
 #include "Job.h"
 #include <iostream>
 
-Job::Job(std::vector<Task> jobList) :beginTime (-1), endTime(0),taskList(jobList)
+Job::Job(std::vector<Task> jobList) : beginTime(-1), endTime(0), taskList(jobList)
 {
 	int totalDuration = 0;
 	for (auto x : jobList)
@@ -26,7 +26,7 @@ Job::~Job()
 	// TODO Auto-generated destructor stub
 }
 
-Job::Job(const Job& otherJob)
+Job::Job(const Job &otherJob)
 {
 	this->name = otherJob.name;
 	this->beginTime = otherJob.beginTime;
@@ -36,9 +36,8 @@ Job::Job(const Job& otherJob)
 	this->isRunning = otherJob.isRunning;
 	this->begon = otherJob.begon;
 	this->isDone = otherJob.isDone;
-
 }
-Job Job::operator=(Job const& otherJob)
+Job Job::operator=(Job const &otherJob)
 {
 	this->name = otherJob.name;
 	this->beginTime = otherJob.beginTime;
@@ -103,7 +102,7 @@ void Job::setTaskList(std::vector<Task> taskList)
 
 void Job::printJob()
 {
-	for(auto task : taskList)
+	for (auto task : taskList)
 	{
 		std::cout << "(" << task.getMachine() << " " << task.getDuration() << ")";
 	}
@@ -117,7 +116,7 @@ bool Job::isBegon()
 
 void Job::setDone()
 {
-	isDone = true;
+	this->isDone = true;
 }
 
 bool Job::getDoneStatus()
