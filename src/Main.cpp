@@ -42,7 +42,7 @@ void parseFile(std::string filename)
 
 			std::cout << "finished the scheduling" << line << std::endl;
 			shoppie.printJobShop();
-			// shoppie.clearJobShop();
+			shoppie.clearJobShop();
 			jobNr = 0;
 			lineNr = -3;
 		}

@@ -8,7 +8,7 @@
 #include "Job.h"
 #include <iostream>
 
-Job::Job(std::vector<Task> jobList) : beginTime(-1), endTime(0), taskList(jobList)
+Job::Job(std::vector<Task> jobList) : beginTime(-1), endTime(-1), taskList(jobList)
 {
 	int totalDuration = 0;
 	for (auto x : jobList)
