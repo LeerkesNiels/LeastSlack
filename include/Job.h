@@ -17,22 +17,22 @@ class Job
 public:
 	Job(std::vector<Task> jobList);
 	virtual ~Job();
-	Job(const Job& otherJob);
-	Job operator=(const Job& job);
+	Job(const Job &otherJob);
+	Job operator=(const Job &job);
 	int getTotalDuration() const;
 	void setTotalDuration(int totalDuration);
 	int calcTotalDuration(std::vector<Task> jobList);
 	void addTOJobList();
-	//begintime
+	// begintime
 	int getBeginTime() const;
 	void setBeginTime(int beginTime);
-	//endtime
+	// endtime
 	int getEndTime() const;
 	void setEndTime(int endTime);
-	//currentTime
+	// currentTime
 	int getCurrentTime() const;
 	void setCurrentTime(int currentTime);
-	bool getRunningStatus(); 
+	bool getRunningStatus();
 	void setRunningStatus(bool newStatus);
 
 	std::vector<Task> getTaskList();
@@ -42,6 +42,8 @@ public:
 
 	void setDone();
 	bool getDoneStatus();
+	void setIndex(int newIndex);
+	int getIndex();
 
 private:
 	std::string name;
@@ -52,6 +54,7 @@ private:
 	bool isRunning;
 	bool isDone;
 	bool begon;
+	int index;
 };
 
 #endif /* JOB_H_ */

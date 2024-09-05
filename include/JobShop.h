@@ -13,7 +13,7 @@ public:
 	virtual ~JobShop();
 	void calcLongestJob();
 	void setLongestJob(int longestJob);
-	void AddToJoblist(Job j);
+	void AddToJobList(Job j);
 	int getLongestJobIndex() const;
 	void makeLeastSlack();
 
@@ -21,18 +21,18 @@ public:
 	std::vector<std::string> parseString(const std::string &inputString);
 	void setJobName(std::string name);
 	void setJobDetails(const std::string &detailString);
-	int setJobList(const std::string &input);
+	int setJobList(const std::string &input, int jobNr);
 	void printJobShop();
 	void schedule();
-	void tick(Job job, int index);
-	void removeFirstInLine(Job job, int index);
-	void activateJob(int jobNr);
+	void tick(Job job);
+	void removeFirstInLine(Job job);
+	void activateJob(Job job);
 	bool checkRunningMachine(int machineNr);
 	void removeFromActiveMachineList(int machineNr);
 	void printActiveMachineList();
-	bool checkForFasterMachines(int machieNr, Job job);
+	bool checkForFasterMachines(Job job);
 	bool finishCheck();
-	void checkAvailableJobs(int machineNr);
+	void activateNextJob(Job incomingJob);
 
 private:
 	int amountOfMachines;
@@ -43,7 +43,7 @@ private:
 	std::vector<Job> jobList;
 	bool finished;
 
-	std::vector<int> activeMachines;
+	std::vector<int> activeMachines = {};
 };
 
 #endif /* JOBSHOP_H_ */

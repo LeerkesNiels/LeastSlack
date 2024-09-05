@@ -12,10 +12,7 @@ JobShop shoppie(0);
 
 int main(int argc, char **argv)
 {
-	signed int eolCounter = 0;
-	int amountOfJob = 0;
-	int amountOfMachines = 0;
-	int counterForParse = 0;
+
 	char name[256];
 
 	std::cout << "Enter the file name:";
@@ -27,38 +24,44 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-
 void parseFile(std::string filename)
 {
 	std::string line;
 	std::ifstream infile;
 	int lineNr = -2;
+	int jobNr = 0;
 	infile.open(filename);
 	while (!infile.eof()) // To get you all the lines.
 	{
 		getline(infile, line); // Saves the line in STRING.
 		// std::cout <<lineNr <<" raw: "<< line <<std::endl;
-		if(line.size() == 0)
-		{		
+		if (line.size() == 0)
+		{
 			shoppie.calcLongestJob();
 			shoppie.schedule();
-			// shoppie.printJobShop();
-			shoppie.clearJobShop();
-			lineNr= -3;
+
+			std::cout << "finished the scheduling" << line << std::endl;
+			shoppie.printJobShop();
+			// shoppie.clearJobShop();
+			jobNr = 0;
+			lineNr = -3;
 		}
-		if(lineNr== -2)
+		if (lineNr == -2)
 		{
 			shoppie.setJobName(line);
-		}else if(lineNr== -1)
+		}
+		else if (lineNr == -1)
 		{
 			shoppie.setJobDetails(line);
-		}else{
-			shoppie.setJobList(line);
+		}
+		else
+		{
+			shoppie.setJobList(line, jobNr);
+			++jobNr;
 		}
 		++lineNr;
 		// std::cout << amoundOfLines << " : "<< line << std::endl;
-		// std::cout << "size: " << wholeLine.size() << std::endl; 
-
+		// std::cout << "size: " << wholeLine.size() << std::endl;
 	}
 	// 	switch (eolCounter)
 	// 	{
@@ -72,7 +75,7 @@ void parseFile(std::string filename)
 	// 		for (auto x : wholeLine):
 	// 		{
 
-	// 			std::cout << "couter at: " << i << std::endl; 
+	// 			std::cout << "couter at: " << i << std::endl;
 	// 			if (x == ' ')
 	// 			{
 	// 				s = "";
@@ -143,5 +146,4 @@ void parseFile(std::string filename)
 	// 	++eolCounter;
 	// }
 	infile.close();
-
 }

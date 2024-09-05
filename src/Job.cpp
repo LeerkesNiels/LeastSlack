@@ -36,6 +36,7 @@ Job::Job(const Job &otherJob)
 	this->isRunning = otherJob.isRunning;
 	this->begon = otherJob.begon;
 	this->isDone = otherJob.isDone;
+	this->index = otherJob.index;
 }
 Job Job::operator=(Job const &otherJob)
 {
@@ -47,6 +48,7 @@ Job Job::operator=(Job const &otherJob)
 	this->isRunning = otherJob.isRunning;
 	this->begon = otherJob.begon;
 	this->isDone = otherJob.isDone;
+	this->index = otherJob.index;
 	return *this;
 }
 
@@ -122,4 +124,14 @@ void Job::setDone()
 bool Job::getDoneStatus()
 {
 	return isDone;
+}
+
+void Job::setIndex(int newIndex)
+{
+	this->index = newIndex;
+}
+
+int Job::getIndex()
+{
+	return this->index;
 }
