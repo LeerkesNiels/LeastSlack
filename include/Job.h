@@ -44,6 +44,8 @@ public:
 	bool getDoneStatus();
 	void setIndex(int newIndex);
 	int getIndex();
+	int getRemaining();
+	void reduceRemaining();
 
 private:
 	std::string name;
@@ -51,6 +53,7 @@ private:
 	int endTime;
 	std::vector<Task> taskList;
 	int totalDuration;
+	int remainingDuration;
 	bool isRunning;
 	bool isDone;
 	bool begon;

@@ -16,6 +16,7 @@ Job::Job(std::vector<Task> jobList) : beginTime(-1), endTime(-1), taskList(jobLi
 		totalDuration += x.getDuration();
 	}
 	this->totalDuration = totalDuration;
+	remainingDuration = totalDuration;
 	isRunning = false;
 	begon = false;
 	isDone = false;
@@ -37,6 +38,7 @@ Job::Job(const Job &otherJob)
 	this->begon = otherJob.begon;
 	this->isDone = otherJob.isDone;
 	this->index = otherJob.index;
+	this->remainingDuration = otherJob.remainingDuration;
 }
 Job Job::operator=(Job const &otherJob)
 {
@@ -49,6 +51,7 @@ Job Job::operator=(Job const &otherJob)
 	this->begon = otherJob.begon;
 	this->isDone = otherJob.isDone;
 	this->index = otherJob.index;
+	this->remainingDuration = otherJob.remainingDuration;
 	return *this;
 }
 
@@ -134,4 +137,14 @@ void Job::setIndex(int newIndex)
 int Job::getIndex()
 {
 	return this->index;
+}
+
+void Job::reduceRemaining()
+{
+	this->remainingDuration = this->remainingDuration - 1;
+}
+
+int Job::getRemaining()
+{
+	return this->remainingDuration;
 }

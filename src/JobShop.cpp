@@ -286,6 +286,7 @@ bool JobShop::checkForFasterMachines(Job currentJob)
 				if (currentJob.getTaskList().at(0).getMachine() == job.getTaskList().at(0).getMachine())
 				{
 					if (currentJob.getTotalDuration() < job.getTotalDuration())
+					// if (currentJob.getRemaining() < job.getRemaining())
 					{
 						// i am not the one with the longest duration
 						// std::cout << "found longer job at index" << job.getIndex() << std::endl;
@@ -355,6 +356,7 @@ void JobShop::tick(Job job)
 	helperList = job.getTaskList();
 	helperList.at(0) = currentTask;
 	Job j = job;
+	j.reduceRemaining();
 	j.setTaskList(helperList);
 	jobList.at(job.getIndex()) = j;
 }
