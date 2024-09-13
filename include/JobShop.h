@@ -33,6 +33,7 @@ public:
 	bool checkForFasterMachines(Job job);
 	bool finishCheck();
 	void activateNextJob(Job incomingJob);
+	void tickAll();
 
 private:
 	int amountOfMachines;

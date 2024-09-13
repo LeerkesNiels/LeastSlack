@@ -157,9 +157,6 @@ void JobShop::AddToJobList(Job j)
 
 void JobShop::activateJob(Job job)
 {
-	std::cout << "setting the following job on active:" << job.getIndex() << std::endl;
-	std::cout << "my machine nr at index 0 = " << job.getTaskList().at(0).getMachine() << std::endl;
-
 	if (job.getBeginTime() == -1)
 	{
 		job.setBeginTime(currentTime);
@@ -167,7 +164,6 @@ void JobShop::activateJob(Job job)
 	job.setRunningStatus(true);
 	activeMachines.push_back(job.getTaskList().at(0).getMachine());
 	jobList.at(job.getIndex()) = job;
-	tick(job);
 }
 
 void JobShop::printActiveMachineList()
@@ -183,7 +179,6 @@ void JobShop::printActiveMachineList()
 void JobShop::schedule()
 {
 	int loops = 0;
-	// while (loops < 10)
 	while (!finished)
 	{
 		int index = 0;
@@ -200,16 +195,11 @@ void JobShop::schedule()
 				{
 					removeFirstInLine(jobList.at(jobNr));
 					jobList.at(jobNr).setRunningStatus(false);
-					activateNextJob(jobList.at(jobNr));
 					for (auto job : jobList)
 					{
 						activateNextJob(job);
 					}
 					finished = finishCheck();
-				}
-				else
-				{
-					tick(jobList.at(jobNr));
 				}
 			}
 			++index;
@@ -217,6 +207,7 @@ void JobShop::schedule()
 		++loops;
 		printJobShop();
 		++currentTime;
+		tickAll();
 	}
 	std::cout << "exiting the schedule function!" << std::endl;
 }
@@ -256,26 +247,19 @@ bool JobShop::finishCheck()
 
 bool JobShop::checkRunningMachine(int machineNr)
 {
-	// printActiveMachineList();
-	// std::cout << "incoming nr : " << machineNr << std::endl;
-
 	for (int i = 0; i < activeMachines.size(); ++i)
 	{
-		// std::cout << "machineNr: " << machineNr << " == " << machine << std::endl;
 		if (activeMachines.at(i) == machineNr)
 		{
-			// std::cout << "returning true;" << std::endl;
 			return true;
 		}
 	}
-	// std::cout << "returning false;" << std::endl;
 	return false;
 }
 
 bool JobShop::checkForFasterMachines(Job currentJob)
 {
 	int index = 0;
-	// std::cout << "my total duration = " << currentJob.getTotalDuration() << std::endl;
 	for (auto job : jobList)
 	{
 		// check if you are not checking yourself
@@ -285,19 +269,14 @@ bool JobShop::checkForFasterMachines(Job currentJob)
 			{
 				if (currentJob.getTaskList().at(0).getMachine() == job.getTaskList().at(0).getMachine())
 				{
-					if (currentJob.getTotalDuration() < job.getTotalDuration())
-					// if (currentJob.getRemaining() < job.getRemaining())
+					if (currentJob.getRemaining() < job.getRemaining())
 					{
-						// i am not the one with the longest duration
-						// std::cout << "found longer job at index" << job.getIndex() << std::endl;
 						return false;
 					}
 				}
 			}
 		}
 	}
-	// std::cout << "check for faster returning false with index: " << currentJob.getIndex() << std::endl;
-	// i am the longest one
 	return true;
 }
 
@@ -307,19 +286,18 @@ void JobShop::removeFirstInLine(Job job)
 	helperList = job.getTaskList();
 	Job j = job;
 	int machineNr = job.getTaskList().at(0).getMachine();
-	// std::cout << "removing the following machine nr: " << helperList.at(0).getMachine() << std::endl;
-	std::cout << "size = " << job.getTaskList().size() << std::endl;
 	if (job.getTaskList().size() > 1)
 	{
 		helperList.erase(helperList.begin());
 	}
 	else
 	{
-		std::cout << "current time when ending the whole job = " << currentTime << std::endl;
-
-		std::cout << "size of j.taskList= " << j.getTaskList().size() << std::endl;
 		j.setDone();
-		j.setEndTime(currentTime);
+		if (j.getEndTime() == -1)
+		{
+			j.setEndTime(currentTime);
+		}
+
 		Task t(-1, -1, -1);
 		helperList.at(0) = t;
 	}
@@ -342,7 +320,6 @@ void JobShop::removeFromActiveMachineList(int machineNr)
 		}
 		++index;
 	}
-	// std::cout << "removing at index:" << onIndex << std::endl;
 	activeMachines.erase(activeMachines.begin() + onIndex);
 	// std::cout << "after removing:" << std::endl;
 	// printActiveMachineList();
@@ -360,7 +337,16 @@ void JobShop::tick(Job job)
 	j.setTaskList(helperList);
 	jobList.at(job.getIndex()) = j;
 }
-
+void JobShop::tickAll()
+{
+	for (auto job : jobList)
+	{
+		if (job.getRunningStatus())
+		{
+			tick(job);
+		}
+	}
+}
 void JobShop::makeLeastSlack()
 {
 }
