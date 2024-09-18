@@ -13,13 +13,11 @@ JobShop shoppie(0);
 int main(int argc, char **argv)
 {
 
-	char name[256];
-
-	std::cout << "Enter the file name:";
-	std::cin.getline(name, 256);
-	std::cout << name << std::endl;
-	parseFile(name);
-	shoppie.makeLeastSlack();
+	if (argc == 2)
+		parseFile(argv[1]);
+	else
+		std::cout << "invalid amount of arguments. " << '\n';
+	// shoppie.makeLeastSlack();
 
 	return 0;
 }
@@ -34,7 +32,7 @@ void parseFile(std::string filename)
 	while (!infile.eof()) // To get you all the lines.
 	{
 		getline(infile, line); // Saves the line in STRING.
-		// std::cout <<lineNr <<" raw: "<< line <<std::endl;
+		// std::cout << lineNr << " raw: " << line << std::endl;
 		if (line.size() == 0)
 		{
 			shoppie.calcLongestJob();

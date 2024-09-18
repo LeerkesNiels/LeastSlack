@@ -13,10 +13,10 @@ Task::Task()
 	machine = 0;
 	duration = 0;
 	duration = 0;
-	finished = true;
+	finished = false;
 }
 
-Task::Task(int machine, int duration, int id) : machine (machine), duration (duration), id (id)
+Task::Task(int id, int machine, int duration) : id(id), machine(machine), duration(duration)
 {
 	finished = false;
 }
@@ -24,14 +24,14 @@ Task::Task(int machine, int duration, int id) : machine (machine), duration (dur
 Task::~Task()
 {
 }
-Task::Task(const Task& otherTask)
+Task::Task(const Task &otherTask)
 {
 	this->id = otherTask.id;
 	this->machine = otherTask.machine;
 	this->duration = otherTask.duration;
 	this->finished = otherTask.finished;
 }
-Task Task::operator=(Task const& newTask)
+Task Task::operator=(Task const &newTask)
 {
 	this->id = newTask.id;
 	this->machine = newTask.machine;
@@ -42,7 +42,7 @@ Task Task::operator=(Task const& newTask)
 
 void Task::reduceDuration()
 {
-	this->duration = duration-1;
+	this->duration = duration - 1;
 }
 
 int Task::getDuration() const

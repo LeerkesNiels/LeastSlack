@@ -15,7 +15,6 @@ public:
 	void setLongestJob(int longestJob);
 	void AddToJobList(Job j);
 	int getLongestJobIndex() const;
-	void makeLeastSlack();
 
 	void clearJobShop();
 	std::vector<std::string> parseString(const std::string &inputString);
@@ -34,6 +33,7 @@ public:
 	bool finishCheck();
 	void activateNextJob(Job incomingJob);
 	void tickAll();
+	void printResult();
 
 private:
 	int amountOfMachines;
