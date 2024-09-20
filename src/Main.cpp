@@ -29,36 +29,35 @@ void parseFile(std::string filename)
 	int lineNr = -2;
 	int jobNr = 0;
 	infile.open(filename);
+
 	while (!infile.eof()) // To get you all the lines.
 	{
 		getline(infile, line); // Saves the line in STRING.
-		// std::cout << lineNr << " raw: " << line << std::endl;
 		if (line.size() == 0)
 		{
 			shoppie.calcLongestJob();
 			shoppie.schedule();
-
-			// std::cout << "finished the scheduling" << line << std::endl;
-			// shoppie.printJobShop();
 			shoppie.clearJobShop();
 			jobNr = 0;
 			lineNr = -3;
 		}
-		if (lineNr == -2)
-		{
-			shoppie.setJobName(line);
-		}
-		else if (lineNr == -1)
-		{
-			shoppie.setJobDetails(line);
-		}
 		else
 		{
-			shoppie.setJobList(line, jobNr);
-			++jobNr;
+			if (lineNr == -2)
+			{
+				shoppie.setJobName(line);
+			}
+			else if (lineNr == -1)
+			{
+				shoppie.setJobDetails(line);
+			}
+			else
+			{
+				shoppie.setJobList(line, jobNr);
+				++jobNr;
+			}
 		}
 		++lineNr;
 	}
-
 	infile.close();
 }

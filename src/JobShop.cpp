@@ -23,6 +23,7 @@ void JobShop::clearJobShop()
 	}
 	jobList.clear();
 	finished = false;
+	this->currentTime = 0;
 }
 
 void JobShop::setJobName(std::string name)
@@ -43,8 +44,9 @@ void JobShop::printJobShop()
 		std::cout << job.getIndex() << '\t' << job.getBeginTime() << '\t' << job.getEndTime() << '\t' << job.getTotalDuration() << '\t' << "[" << job.getRunningStatus() << "]" << '\t' << ",";
 		for (auto task : job.getTaskList())
 		{
-			std::cout << "( " << task.getMachine() << " " << task.getDuration() << "), " << "[" << job.getDoneStatus() << "]" << '\n';
+			std::cout << "( " << task.getMachine() << " " << task.getDuration() << "), " << "[" << job.getDoneStatus() << "]";
 		}
+		std::cout << '\n';
 	}
 	std::cout << "Longest job at index: " << longestJob << std::endl;
 	std::cout << "current time = " << currentTime << std::endl;
@@ -107,7 +109,6 @@ void JobShop::setJobDetails(const std::string &detailString)
 int JobShop::setJobList(const std::string &input, int jobNr)
 {
 	std::vector<std::string> split = parseString(input);
-	// std::cout <<"input in setJobList: "<< input << std::endl;
 	std::vector<Task> taskList;
 	int index = 0;
 	int size = static_cast<int>(split.size()) / 2;
@@ -118,7 +119,14 @@ int JobShop::setJobList(const std::string &input, int jobNr)
 		index += 2;
 	}
 	Job job(taskList);
-	job.setIndex(jobNr);
+	if (jobNr == 0)
+	{
+		job.setIndex(0);
+	}
+	else
+	{
+		job.setIndex(jobNr);
+	}
 	jobList.push_back(job);
 	return 0;
 }
@@ -347,4 +355,5 @@ void JobShop::printResult()
 	{
 		std::cout << job.getIndex() << '\t' << job.getBeginTime() << '\t' << job.getEndTime() << '\n';
 	}
+	std::cout << '\n';
 }
