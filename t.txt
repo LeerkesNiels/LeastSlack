@@ -21,7 +21,6 @@ Lawrence 20x5 instance (Table 5, instance 3); also called (seth3) or (H3)
 3 93 1 65 2 95 0 59 4 46
 0 60 1 85 2 43 4 85 3 32
 
-
 Fisher and Thompson 6x6 instance, alternate name (mt06)
 6 6
 2  1  0  3  1  6  3  7  5  3  4  6
