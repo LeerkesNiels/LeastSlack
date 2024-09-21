@@ -17,10 +17,6 @@ JobShop::~JobShop()
 
 void JobShop::clearJobShop()
 {
-	for (auto job : jobList)
-	{
-		job.getTaskList().clear();
-	}
 	jobList.clear();
 	finished = false;
 	this->currentTime = 0;

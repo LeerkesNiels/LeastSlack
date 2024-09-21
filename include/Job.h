@@ -10,54 +10,176 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
+
 #include "Task.h"
 
 class Job
 {
 public:
-	Job(std::vector<Task> jobList);
+	/**
+	* @brief Construct a new Job 
+	*   
+	* @param taskList Sets a vector list of tasks as the tasklist
+	*/
+	Job(const std::vector<Task> taskList);
+	/**
+	 * @brief clear the tasklist before destroying the job.
+	 * 
+	 */
 	virtual ~Job();
+	/**
+	 * @brief Construct a new Job object
+	 * 
+	 * @param otherJob 
+	 */
 	Job(const Job &otherJob);
-	Job operator=(const Job &job);
-	int getTotalDuration() const;
-	void setTotalDuration(int totalDuration);
-	int calcTotalDuration(std::vector<Task> jobList);
-	void addTOJobList();
-	// begintime
-	int getBeginTime() const;
-	void setBeginTime(int beginTime);
-	// endtime
-	int getEndTime() const;
-	void setEndTime(int endTime);
-	// currentTime
-	int getCurrentTime() const;
-	void setCurrentTime(int currentTime);
-	bool getRunningStatus();
-	void setRunningStatus(bool newStatus);
 
-	std::vector<Task> getTaskList();
-	void setTaskList(std::vector<Task> taskList);
+	/**
+	 * @brief copy constructor for job.
+	 * 
+	 * @param job the incomming job.
+	 * @return The new job object.  
+	 */
+	Job operator=(const Job &job);
+
+	/**
+	 * @brief Get the Total Duration for this Job.
+	 * 
+	 * @return int 
+	 */
+	int getTotalDuration() const;
+
+	/**
+	 * @brief Set the Total Duration 
+	 * 
+	 * @param totalDuration 
+	 */
+	void setTotalDuration(const int totalDuration);
+
+	/**
+	 * @brief Get the Begin Time 
+	 * 
+	 * @return int 
+	 */
+	int getBeginTime() const;
+	
+	/**
+	 * @brief Set the Begin Time
+	 * 
+	 * @param beginTime 
+	 */
+	void setBeginTime(const int beginTime);
+
+	/**
+	 * @brief Get the End Time
+	 * 
+	 * @return int 
+	 */
+	int getEndTime() const;
+
+	/**
+	 * @brief Set the End Time 
+	 * 
+	 * @param endTime 
+	 */
+	void setEndTime(int endTime);
+	
+	/**
+	 * @brief Get the Running Status
+	 * 
+	 * @return bool, true if the job is currently active false for inactive. 
+	 */
+	bool getRunningStatus();
+
+	/**
+	 * @brief Set the running status. 
+	 * 
+	 * @param newStatus (true)
+	 */
+	void setRunningStatus(const bool newStatus);
+
+	/**
+	 * @brief Get the Task List
+	 * 
+	 * @return taskList
+	 */
+	const std::vector<Task> getTaskList();
+	
+	/**
+	 * @brief Replace the current task list with the incomming one. 
+	 * 
+	 * @param taskList 
+	 */
+	void setTaskList(const std::vector<Task> taskList);
+
+	/**
+	 * @brief Check if the job is already started.
+	 * 
+	 * @return true 
+	 * @return false 
+	 */
 	bool isBegon();
+
+	/**
+	 * @brief set done flag.
+	 * 
+	 */
+	void setDone();
+
+	/**
+	 * @brief print all the tasks in the job.
+	 * 
+	 */
 	void printJob();
 
-	void setDone();
+	/**
+	 * @brief get the done status for the job.
+	 * 
+	 */
 	bool getDoneStatus();
+	
+	/**
+	 * @brief set the job index in the jobshop.
+	 * 
+	 * @param newIndex 
+	 */
 	void setIndex(int newIndex);
+
+	/**
+	 * @brief get the index of the job in the jobshop.
+	 * 
+	 * @return int 
+	 */
 	int getIndex();
+
+	/**
+	 * @brief Get the Remaining time left of the job.
+	 * 
+	 * @return int 
+	 */
 	int getRemaining();
+
+	/**
+	 * @brief recude the remaining time of the job by 1. 
+	 * 
+	 */
 	void reduceRemaining();
 
 private:
-	std::string name;
+	int index;
+	
 	int beginTime;
 	int endTime;
-	std::vector<Task> taskList;
+
 	int totalDuration;
 	int remainingDuration;
+	
+	std::vector<Task> taskList;
+	
 	bool isRunning;
 	bool isDone;
 	bool begon;
-	int index;
 };
 
 #endif /* JOB_H_ */

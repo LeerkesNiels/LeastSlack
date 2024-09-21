@@ -1,19 +1,11 @@
-/*
- * Job.cpp
- *
- *  Created on: 1 mrt. 2021
- *      Author: na_le
- */
-
 #include "Job.h"
-#include <iostream>
 
-Job::Job(std::vector<Task> jobList) : beginTime(-1), endTime(-1), taskList(jobList)
+Job::Job(const std::vector<Task> taskList) : beginTime(-1), endTime(-1), taskList(taskList)
 {
 	int totalDuration = 0;
-	for (auto x : jobList)
+	for (auto task : taskList)
 	{
-		totalDuration += x.getDuration();
+		totalDuration += task.getDuration();
 	}
 	this->totalDuration = totalDuration;
 	remainingDuration = totalDuration;
@@ -24,12 +16,11 @@ Job::Job(std::vector<Task> jobList) : beginTime(-1), endTime(-1), taskList(jobLi
 
 Job::~Job()
 {
-	// TODO Auto-generated destructor stub
+	taskList.clear();
 }
 
 Job::Job(const Job &otherJob)
 {
-	this->name = otherJob.name;
 	this->beginTime = otherJob.beginTime;
 	this->endTime = otherJob.endTime;
 	this->taskList = otherJob.taskList;
@@ -42,7 +33,6 @@ Job::Job(const Job &otherJob)
 }
 Job Job::operator=(Job const &otherJob)
 {
-	this->name = otherJob.name;
 	this->beginTime = otherJob.beginTime;
 	this->endTime = otherJob.endTime;
 	this->taskList = otherJob.taskList;
@@ -53,9 +43,9 @@ Job Job::operator=(Job const &otherJob)
 	this->index = otherJob.index;
 	this->remainingDuration = otherJob.remainingDuration;
 	return *this;
-}
+}	
 
-std::vector<Task> Job::getTaskList()
+const std::vector<Task> Job::getTaskList()
 {
 	return taskList;
 }
@@ -65,7 +55,7 @@ int Job::getTotalDuration() const
 	return totalDuration;
 }
 
-void Job::setTotalDuration(int totalDuration)
+void Job::setTotalDuration(const int totalDuration)
 {
 	this->totalDuration = totalDuration;
 }
@@ -90,7 +80,7 @@ void Job::setEndTime(int endTime)
 	this->endTime = endTime;
 }
 
-void Job::setRunningStatus(bool newStatus)
+void Job::setRunningStatus(const bool newStatus)
 {
 	this->isRunning = newStatus;
 }
@@ -100,7 +90,7 @@ bool Job::getRunningStatus()
 	return this->isRunning;
 }
 
-void Job::setTaskList(std::vector<Task> taskList)
+void Job::setTaskList(const std::vector<Task> taskList)
 {
 	this->taskList = taskList;
 }
