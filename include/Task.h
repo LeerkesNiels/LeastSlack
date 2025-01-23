@@ -1,36 +1,90 @@
-/*
- * Task.h
- *
- *  Created on: 1 mrt. 2021
- *      Author: na_le
- */
-
 #ifndef TASK_H_
 #define TASK_H_
-
-
 
 class Task
 {
 public:
-
+	/**
+	 * @brief Task constructor with defalt -1 values.
+	 * 
+	 */
 	Task();
+
+	/**
+	 * @brief Task constructor.
+	 * 
+	 * @param machine 
+	 * @param duration 
+	 * @param id 
+	 */
 	Task(int machine, int duration,int id);
+
+	/**
+	 * @brief Construct a new Task object
+	 * 
+	 * @param otherTaks 
+	 */
 	Task(const Task& otherTaks);
+
+	/**
+	 * @brief Copy constructor. 
+	 * 
+	 * @param task other task.
+	 * @return Pointer to the new task
+	 */
 	Task operator=(const Task& task);
+
+	/**
+	 * @brief Destroy the Task
+	 * 
+	 */
 	virtual ~Task();
+
+	/**
+	 * @brief Get the Duration
+	 * 
+	 * @return int 
+	 */
 	int getDuration() const;
-	void setDuration(int duration);
+
+	/**
+	 * @brief Set the Duration of the task
+	 * 
+	 * @param duration 
+	 */
+	void setDuration(const int duration);
+
+	/**
+	 * @brief Get the Machine number of the task
+	 * 
+	 * @return int 
+	 */
 	int getMachine() const;
-	void setMachine(int machine);
+
+	/**
+	 * @brief Set the Machine number of the task
+	 * 
+	 * @param machine 
+	 */
+	void setMachine(const int machine);
+
+	/**
+	 * @brief Get the task Id.
+	 *
+	 * @return int 
+	 */
 	int getId() const;
+
+	/**
+	 * @brief Reduce the duration of the task by one. 
+	 * 
+	 */
 	void reduceDuration();
 
 private:
 	int id;
 	int machine;
 	int duration;
-	bool finished;
 
 };
 

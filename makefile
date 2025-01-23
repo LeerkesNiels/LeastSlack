@@ -18,11 +18,13 @@ HEADERS= \
 	include/Job.h \
 	include/JobShop.h \
 	include/Task.h \
+	include/Parse.h \
 
 SOURCE= \
 	src/Job.cpp \
 	src/JobShop.cpp \
 	src/Task.cpp \
+	src/Parse.cpp \
 	src/Main.cpp \
 
 all:

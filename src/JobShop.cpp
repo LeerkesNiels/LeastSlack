@@ -29,7 +29,6 @@ void JobShop::setJobName(std::string name)
 
 void JobShop::printJobShop()
 {
-	// printActiveMachineList();
 	std::cout << "===================================================" << std::endl;
 	std::cout << "Job name: " << this->name << std::endl;
 	std::cout << "amount of jobs: " << this->amountOfJobs << std::endl
@@ -44,11 +43,9 @@ void JobShop::printJobShop()
 		}
 		std::cout << '\n';
 	}
-	std::cout << "Longest job at index: " << longestJob << std::endl;
 	std::cout << "current time = " << currentTime << std::endl;
 	std::cout << "===================================================" << std::endl
 			  << std::endl;
-	// printActiveMachineList();
 }
 
 std::vector<std::string> JobShop::parseString(const std::string &inputString)
